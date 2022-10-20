@@ -12,7 +12,13 @@ export function getHorses(count = 8) {
       time: null,
     };
 
-    horses.push(horse)
+    horses.push(horse);
   }
-  return horses
+  return horses;
+}
+
+export function delay(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
 }
