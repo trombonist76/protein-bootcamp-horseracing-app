@@ -1,17 +1,28 @@
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import {delay} from "@/utils"
+
+const countdown = ref(null)
+
 export default function useCountdown(initialCountdown = 3){
-  const countdown = ref(initialCountdown)
+
+
+  onMounted(() => {
+    countdown.value = 3
+  })
+
+  const isCountdownStarted = ref(false)
 
   async function startCountdown(){
     if (countdown.value !== initialCountdown) return
 
+    isCountdownStarted.value = true
     const interval = setInterval(() => {
       countdown.value --
     },1000)
     
     await delay(3000)
     clearInterval(interval)
+    isCountdownStarted.value = false
   }
 
   function resetCountdown(){
@@ -19,5 +30,5 @@ export default function useCountdown(initialCountdown = 3){
     countdown.value = initialCountdown
   }
 
-  return {countdown, startCountdown, resetCountdown}
+  return {countdown, startCountdown, resetCountdown, isCountdownStarted}
 }

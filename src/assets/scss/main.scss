@@ -5,6 +5,11 @@ html, body, #app{
   font-family: 'Sora', sans-serif;
 }
 
+#modal{
+  position: absolute;
+  inset: 0;
+}
+
 *{
   border: none;
   margin: 0;

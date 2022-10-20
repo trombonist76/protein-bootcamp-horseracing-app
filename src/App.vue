@@ -5,8 +5,9 @@ import Arena from './components/Arena/Arena.vue';
 import useCountdown from './composables/countdown';
 import useHorse from './composables/horse';
 import ButtonComp from './components/Shared/Button.vue';
+import Countdown from "@/components/Countdown/Countdown.vue"
 const { horses, startHorsesToRace } = useHorse()
-const { countdown, startCountdown, resetCountdown } = useCountdown()
+const { isCountdownStarted, startCountdown, resetCountdown } = useCountdown()
 const race = reactive({
   isStarted: false
 })
@@ -20,6 +21,9 @@ const startCountdownHandler = async () => {
 
 <template>
   <div class="app-container">
+    <teleport to='body'>
+      <Countdown v-if="isCountdownStarted"></Countdown>
+    </teleport>
     <div>
       <ButtonComp @click="startCountdownHandler" name="Start Countdown"></ButtonComp>
       <ButtonComp @click="resetCountdown" name="Reset Countdown"></ButtonComp>
