@@ -1,22 +1,23 @@
 <script setup>
-  import {ref, onMounted, watchEffect} from "vue"
+  import {ref, onMounted, watch, watchEffect, computed} from "vue"
   import useHorse from "@/composables/horse"
   const props = defineProps(["horse", "isRaceStarted"])
-  const horseCopy = ref(props.horse)
-  const { runHorse } = useHorse()
-  
+  const checkRun = computed(() => props.isRaceStarted && props.horse.location < 100)
+  const { runHorse, goFinish } = useHorse()
+
   watchEffect(() => {
-    if(!props.isRaceStarted) return
-    let interval = setInterval(() => {
+    if(checkRun.value){
       runHorse(props.horse)
-    }, 50)
+    }else if(props.horse.location >= 100){
+      goFinish(props.horse)
+    }
   })
 
 </script>
 
 <template>
   <div class="horse">
-    <img class="horse__img" v-if="!isRaceStarted" src="/src/assets/img/horse-standing.png" alt="Standing Horse">
+    <img class="horse__img" v-if="!checkRun" :style="{left: `${props.horse.location}%`}" src="/src/assets/img/horse-standing.png" alt="Standing Horse">
     <img class="horse__img" v-else  :style="{left: `${props.horse.location}%`}" src="/src/assets/img/horse-running.gif" alt="Running Horse">
   </div>
 </template>
