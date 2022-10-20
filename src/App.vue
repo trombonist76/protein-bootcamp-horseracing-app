@@ -5,7 +5,7 @@ import Arena from './components/Arena/Arena.vue';
 import useCountdown from './composables/countdown';
 import useHorse from './composables/horse';
 import ButtonComp from './components/Shared/Button.vue';
-const { horses } = useHorse()
+const { horses, startHorsesToRace } = useHorse()
 const { countdown, startCountdown, resetCountdown } = useCountdown()
 const race = reactive({
   isStarted: false
@@ -14,21 +14,20 @@ const race = reactive({
 const startCountdownHandler = async () => {
   await startCountdown()
   race.isStarted = true
+  startHorsesToRace()
 }
 </script>
 
 <template>
   <div class="app-container">
     <div>
-      {{countdown}}
-      {{race.isStarted}}
       <ButtonComp @click="startCountdownHandler" name="Start Countdown"></ButtonComp>
       <ButtonComp @click="resetCountdown" name="Reset Countdown"></ButtonComp>
     </div>
     <Arena>
       <template v-slot:horses>
         <div class="horses">
-          <Horse class="horse" v-for="(horse, index) in horses" :key="horse.id" :horse="horse" :isRaceStarted="race.isStarted" />
+          <Horse class="horse" v-for="horse in horses" :key="horse.id" :horse="horse" :isRaceStarted="race.isStarted" />
         </div>
       </template>
     </Arena>
@@ -40,7 +39,6 @@ const startCountdownHandler = async () => {
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   
 }
 .horses {

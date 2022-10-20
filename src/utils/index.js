@@ -22,3 +22,20 @@ export function delay(ms) {
     setTimeout(resolve, ms);
   });
 }
+
+export function getRandomSpeed(min = 20, max = 40) {
+  const diff = max - min;
+  return Math.random() * diff + min;
+}
+
+export function speedMultiplier(
+  speed,
+  multiplier = 1.2,
+  minBetween = 20,
+  maxBetween = 40
+) {
+  const negativeOrPositive = Math.random() < 0.5 ? -1 : 1;
+  const updatedSpeed = negativeOrPositive * multiplier * speed;
+  const setSpeedBetween = Math.min(Math.max(minBetween, updatedSpeed), maxBetween)
+  return setSpeedBetween
+}
