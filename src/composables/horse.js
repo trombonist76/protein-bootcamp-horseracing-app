@@ -1,10 +1,13 @@
-import { ref, readonly } from 'vue'
+import { ref, readonly, computed } from 'vue'
 import { getHorses, getRandomSpeed, speedMultiplier } from '../utils'
 
 const horses = ref(getHorses(8))
 
 export default function useHorse(){
   
+  const checkAllFinished = computed(() => horses.value.every(horse => horse.location >= 100)) 
+  const leaderboard = computed(() => checkAllFinished.value ? sortByTime() : sortByLocation())
+
   function startHorsesToRace(){
     horses.value = horses.value.map(horse => {
       return {
@@ -13,6 +16,16 @@ export default function useHorse(){
         speed: getRandomSpeed()
       }
     })
+  }
+
+  function sortByLocation(){
+    const rankings = [...horses.value].sort((a,b) => b.location - a.location)
+    return rankings
+  }
+
+  function sortByTime(){
+    const rankings = [...horses.value].sort((a,b) => a.time - b.time)
+    return rankings
   }
 
   function findHorse(horseId){
@@ -40,5 +53,5 @@ export default function useHorse(){
     horse.time = diff
   }
 
-  return { horses: readonly(horses), startHorsesToRace, runHorse, goFinish}
+  return { horses: readonly(horses), startHorsesToRace, runHorse, goFinish, leaderboard}
 }
