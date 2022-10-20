@@ -30,12 +30,12 @@ export function getRandomSpeed(min = 20, max = 40) {
 
 export function speedMultiplier(
   speed,
-  multiplier = 1.2,
+  deviation = 0.2,
   minBetween = 20,
   maxBetween = 40
 ) {
-  const negativeOrPositive = Math.random() < 0.5 ? -1 : 1;
-  const updatedSpeed = negativeOrPositive * multiplier * speed;
+  const negativeOrPositive = Math.random() < 0.5 ? 1 - deviation : 1 + deviation;
+  const updatedSpeed = negativeOrPositive * speed;
   const setSpeedBetween = Math.min(Math.max(minBetween, updatedSpeed), maxBetween)
   return setSpeedBetween
 }

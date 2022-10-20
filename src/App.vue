@@ -6,6 +6,7 @@ import useCountdown from './composables/countdown';
 import useHorse from './composables/horse';
 import ButtonComp from './components/Shared/Button.vue';
 import Countdown from "@/components/Countdown/Countdown.vue"
+import Leaderboard from './components/Leaderboard/Leaderboard.vue';
 const { horses, startHorsesToRace } = useHorse()
 const { isCountdownStarted, startCountdown, resetCountdown } = useCountdown()
 const race = reactive({
@@ -35,6 +36,7 @@ const startCountdownHandler = async () => {
         </div>
       </template>
     </Arena>
+    <Leaderboard></Leaderboard>
   </div>
 </template>
 
