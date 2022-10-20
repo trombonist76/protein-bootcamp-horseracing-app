@@ -4,6 +4,7 @@ import Horse from './components/Horse/Horse.vue';
 import Arena from './components/Arena/Arena.vue';
 import useCountdown from './composables/countdown';
 import useHorse from './composables/horse';
+import ButtonComp from './components/Shared/Button.vue';
 const { horses } = useHorse()
 const { countdown, startCountdown, resetCountdown } = useCountdown()
 const race = reactive({
@@ -21,8 +22,8 @@ const startCountdownHandler = async () => {
     <div>
       {{countdown}}
       {{race.isStarted}}
-      <button @click="startCountdownHandler">Start Countdown</button>
-      <button @click="resetCountdown">Reset Countdown</button>
+      <ButtonComp @click="startCountdownHandler" name="Start Countdown"></ButtonComp>
+      <ButtonComp @click="resetCountdown" name="Reset Countdown"></ButtonComp>
     </div>
     <Arena>
       <template v-slot:horses>
