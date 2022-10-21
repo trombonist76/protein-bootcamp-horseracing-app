@@ -24,8 +24,9 @@ export function delay(ms) {
 }
 
 export function getRandomSpeed(min = 20, max = 40) {
-  const diff = max - min;
-  return Math.random() * diff + min;
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 export function speedMultiplier(
@@ -34,8 +35,9 @@ export function speedMultiplier(
   minBetween = 20,
   maxBetween = 40
 ) {
-  const negativeOrPositive = Math.random() < 0.5 ? 1 - deviation : 1 + deviation;
-  const updatedSpeed = negativeOrPositive * speed;
+  const max =  (1 + deviation) * speed 
+  const min =  (1 - deviation) * speed
+  const updatedSpeed = getRandomSpeed(min, max);
   const setSpeedBetween = Math.min(Math.max(minBetween, updatedSpeed), maxBetween)
   return setSpeedBetween
 }
