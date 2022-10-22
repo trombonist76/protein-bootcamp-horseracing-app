@@ -31,7 +31,7 @@ export function getRandomSpeed(min = 20, max = 40) {
 
 export function speedMultiplier(
   speed,
-  deviation = 0.2,
+  deviation = 0.05,
   minBetween = 20,
   maxBetween = 40
 ) {

@@ -32,6 +32,7 @@
       height: 65px;
       margin-top: -12px;
       position: absolute;
+      transition: left linear .1s;
     }
   }
 

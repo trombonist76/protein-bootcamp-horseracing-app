@@ -41,7 +41,7 @@ export default function useHorse(){
   }
 
   function runHorse(horse){
-    setTimeout(() => updateHorse(horse), 1000 / horse.speed)
+    setTimeout(() => updateHorse(horse), 2000 / horse.speed)
   }
 
   const goFinish = (finishedHorse) => {
