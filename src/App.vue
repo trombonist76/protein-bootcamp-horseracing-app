@@ -25,7 +25,10 @@ const startCountdownHandler = async () => {
     <teleport to='body'>
       <Countdown v-if="isCountdownStarted"></Countdown>
     </teleport>
+    <!-- <Leaderboard></Leaderboard> -->
+
     <div>
+
       <ButtonComp @click="startCountdownHandler" name="Start Countdown"></ButtonComp>
       <ButtonComp @click="resetCountdown" name="Reset Countdown"></ButtonComp>
     </div>
@@ -36,7 +39,6 @@ const startCountdownHandler = async () => {
         </div>
       </template>
     </Arena>
-    <Leaderboard></Leaderboard>
   </div>
 </template>
 
@@ -45,9 +47,11 @@ const startCountdownHandler = async () => {
   height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   
 }
 .horses {
+  flex: 1;
   width: 100%;
   display: flex;
   flex-direction: column;

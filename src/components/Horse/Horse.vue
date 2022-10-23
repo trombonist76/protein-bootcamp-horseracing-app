@@ -24,13 +24,15 @@
 
 <style lang="scss" scoped>
   .horse{
+    
     width: 100%;
-    height: 70px;
+    height: 4.4rem;
     position: relative;
+    background: url('@/assets/icons/lane.svg') ;
 
     &__img{
-      height: 65px;
-      margin-top: -12px;
+      height: 5rem;
+      margin-top: -30px;
       position: absolute;
       transition: left linear .1s;
     }

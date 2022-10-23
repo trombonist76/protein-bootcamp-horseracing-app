@@ -6,6 +6,8 @@ const horses = ref(getHorses(8))
 export default function useHorse(){
   
   const checkAllFinished = computed(() => horses.value.every(horse => horse.location >= 100)) 
+  const isAnyClosing = computed(() => horses.value.some(horse => horse.location >= 70)) 
+  const checkAllGoAway = computed(() => horses.value.some(horse => horse.location >= 30)) 
   const leaderboard = computed(() => checkAllFinished.value ? sortByTime() : sortByLocation())
 
   function startHorsesToRace(){
@@ -53,5 +55,5 @@ export default function useHorse(){
     horse.time = diff
   }
 
-  return { horses: readonly(horses), startHorsesToRace, runHorse, goFinish, leaderboard}
+  return { horses: readonly(horses), startHorsesToRace, runHorse, goFinish, leaderboard, isAnyClosing, checkAllGoAway}
 }
