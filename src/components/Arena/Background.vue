@@ -1,17 +1,32 @@
 <script setup>
-import { computed } from 'vue';
-import useHorse from "@/composables/horse"
+import Leaderboard from '../Leaderboard/Leaderboard.vue';
+import ButtonComp from '@/components/Shared/Button.vue';
+import { useRaceStore } from '@/store/useRace';
+import { useCountdownStore } from '@/store/useCountdown';
+import { useHorseStore } from '@/store/useHorse';
 
-const props = defineProps(["isRaceStarted"])
-const {isAnyClosing } = useHorse()
+const countdownStore = useCountdownStore()
+const raceStore =  useRaceStore()
+const horseStore = useHorseStore()
+
+const startCountdownHandler = async () => {
+  await countdownStore.startCountdown()
+  raceStore.startRace()
+  horseStore.startHorsesToRace()
+}
 
 </script>
 <template>
-  <div class="arena" :class="{'sliding-arena': props.isRaceStarted}">
-  <div class="mid" :class="{'sliding-mid': props.isRaceStarted}">
-    <div class="front" :class="{'sliding-front': props.isRaceStarted}">
+  <div class="arena" :class="{'sliding-arena': raceStore.isStarted}">    
+    <div class="mid" :class="{'sliding-mid': raceStore.isStarted}">
+      <div class="front" :class="{'sliding-front': raceStore.isStarted}">
+        <div class="buttons">
+          <ButtonComp @click="startCountdownHandler" name="Start Countdown"></ButtonComp>
+          <ButtonComp @click="countdownStore.resetCountdown" name="Reset Countdown"></ButtonComp>
+        </div>
+          <Leaderboard></Leaderboard>
+      </div>
     </div>
-  </div>
 </div>
 </template>
 
@@ -35,6 +50,8 @@ const {isAnyClosing } = useHorse()
   height: 100%;
   background: url('@/assets/icons/front.svg');
   transform: translateZ(0);
+  display: flex;
+  justify-content: space-between;
 }
 
 .mid{
@@ -43,6 +60,9 @@ const {isAnyClosing } = useHorse()
   transform: translateZ(0);
 }
 
+
+.buttons{
+}
 
 .sliding-arena{
   animation: bg-arena 45s linear infinite;

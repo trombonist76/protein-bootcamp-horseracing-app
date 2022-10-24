@@ -1,7 +1,7 @@
 <script setup>
-import useHorse from "@/composables/horse"
+import {useHorseStore} from "@/store/useHorse"
 import LeaderboardItem from "./LeaderboardItem.vue";
-const { leaderboard } = useHorse()
+const horseStore = useHorseStore()
 </script>
 <template>
   <div class="leaderboard">
@@ -12,7 +12,7 @@ const { leaderboard } = useHorse()
         <th>Speed</th>
         <th>Time</th>
       </tr>
-      <LeaderboardItem v-for="(horse, index) in leaderboard" :rank="index" :horse="horse" :key="horse.id"></LeaderboardItem>
+      <LeaderboardItem v-for="(horse, index) in horseStore.leaderboard" :rank="index" :horse="horse" :key="horse.id"></LeaderboardItem>
     </table>
   </div>
 </template>
@@ -26,7 +26,7 @@ const { leaderboard } = useHorse()
 
 #leaderboard{
   color: $table-text-color;
-  width: 40%;
+  width: 25%;
   border-radius: 2rem;
   text-align: center;
 

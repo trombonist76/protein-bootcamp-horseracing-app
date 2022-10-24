@@ -1,15 +1,17 @@
 <script setup>
 import {useHorseStore} from "@/store/useHorse"
+import { useRaceStore } from '@/store/useRace';
 import Background from "./Background.vue"
-const props = defineProps(["isRaceStarted"])
+
+const raceStore =  useRaceStore()
 const horseStore = useHorseStore()
 </script>
 
 <template>
   <div class="wrapper">
-    <Background :isRaceStarted="props.isRaceStarted"/>
+    <Background/>
     <div class="lane-wrapper">
-      <div class="lane-wrapper__start" :class="{'slide-left': props.isRaceStarted}">
+      <div class="lane-wrapper__start" :class="{'slide-left': raceStore.isStarted}">
         <div>START</div>
       </div>
       <slot name="horses"></slot>
