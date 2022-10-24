@@ -4,25 +4,40 @@ import ButtonComp from '@/components/Shared/Button.vue';
 import { useRaceStore } from '@/store/useRace';
 import { useCountdownStore } from '@/store/useCountdown';
 import { useHorseStore } from '@/store/useHorse';
+import { ref, watch} from 'vue';
+import {delay} from "@/utils"
 
 const countdownStore = useCountdownStore()
 const raceStore =  useRaceStore()
 const horseStore = useHorseStore()
 
-const startCountdownHandler = async () => {
+const startRaceHandler = async () => {
   await countdownStore.startCountdown()
   raceStore.startRace()
   horseStore.startHorsesToRace()
 }
 
+const resetRaceHandler = () => {
+  countdownStore.$reset()
+  raceStore.$reset()
+  horseStore.$reset()
+}
+
+const isSliding = ref(true)
+
+watch(() => horseStore.isAnyClosing, async() => {
+  await delay(2000)
+  isSliding.value = false
+})
+
 </script>
 <template>
-  <div class="arena" :class="{'sliding-arena': raceStore.isStarted}">    
-    <div class="mid" :class="{'sliding-mid': raceStore.isStarted}">
-      <div class="front" :class="{'sliding-front': raceStore.isStarted}">
+  <div class="arena" :class="{'sliding-arena': raceStore.isStarted, 'paused': !isSliding}">    
+    <div class="mid" :class="{'sliding-mid': raceStore.isStarted, 'paused': !isSliding}">
+      <div class="front" :class="{'sliding-front': raceStore.isStarted, 'paused': !isSliding}">
         <div class="buttons">
-          <ButtonComp @click="startCountdownHandler" name="Start Countdown"></ButtonComp>
-          <ButtonComp @click="countdownStore.resetCountdown" name="Reset Countdown"></ButtonComp>
+          <ButtonComp v-if="!raceStore.isStarted" @click="startRaceHandler" name="Start Race" icon="flag"></ButtonComp>
+          <ButtonComp v-if="raceStore.isFinished" @click="resetRaceHandler" name="Restart Race!"></ButtonComp>
         </div>
           <Leaderboard></Leaderboard>
       </div>
@@ -62,6 +77,10 @@ const startCountdownHandler = async () => {
 
 
 .buttons{
+  margin-left: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .sliding-arena{
@@ -74,6 +93,10 @@ const startCountdownHandler = async () => {
 
 .sliding-front{
   animation: bg-front 15s linear infinite;
+}
+
+.paused{
+  animation-play-state: paused;
 }
 
 @keyframes bg-arena {

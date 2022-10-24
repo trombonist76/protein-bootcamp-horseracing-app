@@ -28,7 +28,7 @@ import { useCountdownStore } from '@/store/useCountdown';
     justify-content: center;
     font-size: 5rem;
     border-radius: 50%;
-    background-color: $btn-bg-color;
+    background-color: $timer-bg-color;
     box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
     transform: scale(1);
     animation: pulse 1s infinite;

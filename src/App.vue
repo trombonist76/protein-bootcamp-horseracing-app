@@ -16,10 +16,10 @@ const raceStore =  useRaceStore()
     <teleport to='body'>
       <Countdown v-if="countdownStore.isCountdownStarted"></Countdown>
     </teleport>
-    <Arena :isRaceStarted="raceStore.isStarted">
+    <Arena>
       <template v-slot:horses>
         <div class="horses" :class="{'slide' : raceStore.isStarted}">
-          <Horse class="horse" v-for="horse in horseStore.horses" :key="horse.id" :horse="horse" :isRaceStarted="raceStore.isStarted" />
+          <Horse class="horse" v-for="horse in horseStore.horses" :key="horse.id" :horse="horse"/>
         </div>
       </template>
     </Arena>

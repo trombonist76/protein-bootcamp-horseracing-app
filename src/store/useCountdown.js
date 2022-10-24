@@ -1,30 +1,31 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
 import {delay} from "@/utils"
 
-export const useCountdownStore = defineStore('counter', () => {
-  const initialCountdown = 3
-  const countdown = ref(initialCountdown)
-  const isCountdownStarted = ref(false)
+export const useCountdownStore = defineStore('counter', {
 
-  async function startCountdown(){
-    if (countdown.value !== initialCountdown) return
+  state: () => ({
+    initialCountdown: 3,
+    countdown: 3,
+    isCountdownStarted: false
+  }),
 
-    isCountdownStarted.value = true
-    const interval = setInterval(() => {
-      countdown.value --
-    },1000)
-    
-    await delay(3000)
-    clearInterval(interval)
-    isCountdownStarted.value = false
+  actions: {
+    async startCountdown(){
+      if (this.countdown !== this.initialCountdown) return
+  
+      this.isCountdownStarted = true
+      const interval = setInterval(() => {
+        this.countdown --
+      },1000)
+      
+      await delay(3000)
+      clearInterval(interval)
+      this.isCountdownStarted = false
+    },
+
+    resetCountdown(){
+      if (this.countdown !== 0) return
+      this.countdown = this.initialCountdown
+    }
   }
-
-  function resetCountdown(){
-    if (countdown.value !== 0) return
-    countdown.value = initialCountdown
-  }
-
-  return {countdown, startCountdown, resetCountdown, isCountdownStarted}
-
 })

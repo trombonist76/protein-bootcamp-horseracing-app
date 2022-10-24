@@ -16,7 +16,7 @@ const horseStore = useHorseStore()
       </div>
       <slot name="horses"></slot>
       <div class="lane-wrapper__finish" :class="{'slide-right': horseStore.isAnyClosing}">
-        FINISH
+        <div>FINISH</div>
       </div>
     </div>
   </div>
@@ -50,10 +50,22 @@ const horseStore = useHorseStore()
     height: 100%;
     position: absolute;
     left: 150px;
-    transition: left 2s linear;
   }
 
   &__finish {
+    // writing-mode: vertical-lr;
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+    // letter-spacing: .8rem;
+    // font-size: 3rem;
+    // background-color: $floor-color;
+    // height: 100%;
+    // position: absolute;
+    // right: -10%;
+    // width: 9%;
+    // transition: right 2s linear;
+
     writing-mode: vertical-lr;
     display: flex;
     align-items: center;
@@ -63,16 +75,18 @@ const horseStore = useHorseStore()
     letter-spacing: .5rem;
     font-size: 3rem;
     overflow: hidden;
-    transition: 2s linear;
   }
 }
 
 .slide-left {
   left: -100%;
+  transition: 2s linear;
+
 }
 
 .slide-right {
-  width: 12%;
+  width: 9%;
+  transition: 2s linear;
 }
 
 @keyframes slide {

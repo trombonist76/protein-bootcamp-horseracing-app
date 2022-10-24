@@ -1,17 +1,19 @@
 <script setup>
-  import {ref, onMounted, watch, watchEffect, computed} from "vue"
+  import {watch, computed} from "vue"
   import { useHorseStore } from '@/store/useHorse';
+  import { useRaceStore } from '@/store/useRace';
 
-  const props = defineProps(["horse", "isRaceStarted"])
-  const checkRun = computed(() => props.isRaceStarted && props.horse.location < 100)
+  const props = defineProps(["horse"])
   const horseStore = useHorseStore()
+  const raceStore =  useRaceStore()
+  const checkRun = computed(() => raceStore.isStarted && props.horse.location < 100)
 
-  watchEffect(() => {
-    if(checkRun.value){
+  watch(() => props.horse.location, () => {
+    if(props.horse.location < 100){
       horseStore.runHorse(props.horse)
-    }else if(props.horse.location >= 100){
-      horseStore.goFinish(props.horse)
+      return
     }
+    horseStore.goFinish(props.horse)
   })
 
 </script>
@@ -34,7 +36,6 @@
     &__img{
       height: 5rem;
       margin-left: 40px;
-
       margin-top: -30px;
       position: absolute;
       transition: left linear .1s;

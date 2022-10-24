@@ -1,61 +1,73 @@
 import { defineStore } from 'pinia'
-import { ref, computed } from 'vue'
 import { getHorses, getRandomSpeed, speedMultiplier} from "@/utils"
+import { useRaceStore } from './useRace'
 
-export const useHorseStore = defineStore('horse', () => {
+export const useHorseStore = defineStore('horse', {
+  state: () => ({horses: getHorses(8)}),
 
-  const horses = ref(getHorses(8))
+  getters: {
+    checkAllFinished : (state) => state.horses.every(horse => horse.location >= 100),
+    isAnyClosing : (state) => state.horses.some(horse => horse.location >= 70),
+    checkAllGoAway : (state) => state.horses.some(horse => horse.location >= 30),
+    leaderboard : (state) => {
+      const raceStore = useRaceStore()
+      return raceStore.isFinished ? state.sortByTime() : state.sortByLocation()
+    }
 
-  const checkAllFinished = computed(() => horses.value.every(horse => horse.location >= 100)) 
-  const isAnyClosing = computed(() => horses.value.some(horse => horse.location >= 70)) 
-  const checkAllGoAway = computed(() => horses.value.some(horse => horse.location >= 30)) 
-  const leaderboard = computed(() => checkAllFinished.value ? sortByTime() : sortByLocation())
+  },
 
-  function startHorsesToRace(){
-    horses.value = horses.value.map(horse => {
-      return {
-        ...horse, 
-        startedAt: Date.now(),
-        speed: getRandomSpeed()
-      }
-    })
+  actions: {
+    startHorsesToRace() {
+      this.horses = this.horses.map(horse => {
+        return {
+          ...horse, 
+          startedAt: Date.now(),
+          speed: getRandomSpeed(),
+          location: 0
+        }
+      })
+    },
+
+    sortByLocation(){
+      const rankings = [...this.horses].sort((a,b) => {
+        const now = Date.now()
+        const aDiff = (now - a.startedAt) / a.location
+        const bDiff = (now - b.startedAt) / b.location
+        return aDiff - bDiff
+      })
+      return rankings
+    },
+
+    sortByTime(){
+      const rankings = [...this.horses].sort((a,b) => a.time - b.time)
+      return rankings
+    },
+
+    findHorse(horseId){
+      const horseIndex = this.horses.findIndex(horse => horse.id === horseId)
+      const horse = this.horses.at(horseIndex)
+      return horse
+    },
+
+    updateHorse(updatingHorse){
+      const horse = this.findHorse(updatingHorse.id)
+      horse.speed = speedMultiplier(updatingHorse.speed)
+      horse.location = updatingHorse.location + .4
+    },
+
+    runHorse(horse){
+      const raceStore = useRaceStore()
+      if(!raceStore.isStarted) return
+      setTimeout(() => this.updateHorse(horse), 2000 / horse.speed)
+    },
+
+    goFinish(finishedHorse){
+      const horse = this.findHorse(finishedHorse.id)
+      const now = Date.now()
+      const diff = (now - horse.startedAt) / 1000
+      horse.speed = 0
+      horse.finishedAt = now
+      horse.time = diff
+    }
   }
-
-  function sortByLocation(){
-    const rankings = [...horses.value].sort((a,b) => b.location - a.location)
-    return rankings
-  }
-
-  function sortByTime(){
-    const rankings = [...horses.value].sort((a,b) => a.time - b.time)
-    return rankings
-  }
-
-  function findHorse(horseId){
-    const horseIndex = horses.value.findIndex(horse => horse.id === horseId)
-    const horse = horses.value.at(horseIndex)
-    return horse
-  }
-
-  function updateHorse(updatingHorse){
-    const horse = findHorse(updatingHorse.id)
-    horse.speed = speedMultiplier(updatingHorse.speed)
-    horse.location = updatingHorse.location + .4
-  }
-
-  function runHorse(horse){
-    setTimeout(() => updateHorse(horse), 2000 / horse.speed)
-  }
-
-  const goFinish = (finishedHorse) => {
-    const horse = findHorse(finishedHorse.id)
-    const now = Date.now()
-    const diff = (now - horse.startedAt) / 1000
-    horse.speed = 0
-    horse.finishedAt = now
-    horse.time = diff
-  }
-
-  return { horses: horses, startHorsesToRace, runHorse, goFinish, leaderboard, isAnyClosing, checkAllGoAway}
-
 })

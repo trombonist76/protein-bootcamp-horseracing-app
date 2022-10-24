@@ -5,7 +5,7 @@ export function getHorses(count = 8) {
     const horse = {
       id: i + 1,
       name: `Horse ${i + 1}`,
-      location: 0,
+      location: 1,
       speed: 0,
       startedAt: null,
       finishedAt: null,

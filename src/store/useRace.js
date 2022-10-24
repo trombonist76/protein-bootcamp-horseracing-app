@@ -1,14 +1,21 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { useHorseStore } from './useHorse'
 
-export const useRaceStore = defineStore('race', () => {
+export const useRaceStore = defineStore('race',{
+  state: () => ({
+    isStarted: false
+  }),
 
-  const isStarted = ref(false)
-  const isFinished = ref(false)
+  getters: {
+    isFinished: () => {
+      const horseStore = useHorseStore()
+      return horseStore.checkAllFinished
+    } 
+  },
 
-  function startRace(){
-    isStarted.value = true
+  actions: {
+    startRace(){
+      this.isStarted = true
+    }
   }
-
-  return {isStarted, isFinished, startRace}
 })
