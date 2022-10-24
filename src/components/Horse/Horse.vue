@@ -1,15 +1,16 @@
 <script setup>
   import {ref, onMounted, watch, watchEffect, computed} from "vue"
-  import useHorse from "@/composables/horse"
+  import { useHorseStore } from '@/store/useHorse';
+
   const props = defineProps(["horse", "isRaceStarted"])
   const checkRun = computed(() => props.isRaceStarted && props.horse.location < 100)
-  const { runHorse, goFinish } = useHorse()
+  const horseStore = useHorseStore()
 
   watchEffect(() => {
     if(checkRun.value){
-      runHorse(props.horse)
+      horseStore.runHorse(props.horse)
     }else if(props.horse.location >= 100){
-      goFinish(props.horse)
+      horseStore.goFinish(props.horse)
     }
   })
 
@@ -17,6 +18,7 @@
 
 <template>
   <div class="horse">
+    {{horse.id}}
     <img class="horse__img" v-if="!checkRun" :style="{left: `${props.horse.location}%`}" src="/src/assets/img/horse-standing.png" alt="Standing Horse">
     <img class="horse__img" v-else  :style="{left: `${props.horse.location}%`}" src="/src/assets/img/horse-running.gif" alt="Running Horse">
   </div>
@@ -24,14 +26,15 @@
 
 <style lang="scss" scoped>
   .horse{
-    
+    font-size: 3rem;
     width: 100%;
     height: 4.4rem;
     position: relative;
-    background: url('@/assets/icons/lane.svg') ;
 
     &__img{
       height: 5rem;
+      margin-left: 40px;
+
       margin-top: -30px;
       position: absolute;
       transition: left linear .1s;

@@ -1,11 +1,11 @@
 <script setup>
-import useCountdown from '@/composables/countdown';
-  const {countdown} = useCountdown()
+import { useCountdownStore } from '@/store/useCountdown';
+  const countdownStore = useCountdownStore()
 </script>
 <template>
   <div class="countdown">
     <div class="countdown__circle">
-      {{countdown}}
+      {{countdownStore.countdown}}
     </div>
   </div>
 </template>

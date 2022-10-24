@@ -1,9 +1,15 @@
-<script>
+<script setup>
+import { computed } from 'vue';
+import useHorse from "@/composables/horse"
+
+const props = defineProps(["isRaceStarted"])
+const {isAnyClosing } = useHorse()
+
 </script>
 <template>
-  <div class="arena">
-  <div class="mid" :style="{backgroundImage:'url(/src/assets/icons/mid.svg'}">
-    <div class="front" :style="{backgroundImage:'url(/src/assets/icons/front.svg'}">
+  <div class="arena" :class="{'sliding-arena': props.isRaceStarted}">
+  <div class="mid" :class="{'sliding-mid': props.isRaceStarted}">
+    <div class="front" :class="{'sliding-front': props.isRaceStarted}">
     </div>
   </div>
 </div>
@@ -20,29 +26,51 @@
   perspective: 1000;
 }
 .arena {
-  height: 40%;
+  height: 60%;
   background: url('@/assets/icons/back.svg');
-  animation: bg 15s linear infinite;
   transform: translateZ(0);
 }
 
 .front{
   height: 100%;
   background: url('@/assets/icons/front.svg');
-  animation: bg 5s linear infinite;
   transform: translateZ(0);
 }
 
 .mid{
   height: 100%;
   background: url('@/assets/icons/mid.svg');
-  animation: bg 10s linear infinite;
   transform: translateZ(0);
 }
 
-@keyframes bg {
+
+.sliding-arena{
+  animation: bg-arena 45s linear infinite;
+}
+
+.sliding-mid{
+  animation: bg-mid 30s linear infinite;
+}
+
+.sliding-front{
+  animation: bg-front 15s linear infinite;
+}
+
+@keyframes bg-arena {
   100% {
     background-position: -200% 0;
+  }
+}
+
+@keyframes bg-mid {
+  100% {
+    background-position: -400% 0;
+  }
+}
+
+@keyframes bg-front {
+  100% {
+    background-position: -600% 0;
   }
 }
 </style>
