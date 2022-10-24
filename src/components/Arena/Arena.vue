@@ -53,19 +53,6 @@ const horseStore = useHorseStore()
   }
 
   &__finish {
-    // writing-mode: vertical-lr;
-    // display: flex;
-    // align-items: center;
-    // justify-content: center;
-    // letter-spacing: .8rem;
-    // font-size: 3rem;
-    // background-color: $floor-color;
-    // height: 100%;
-    // position: absolute;
-    // right: -10%;
-    // width: 9%;
-    // transition: right 2s linear;
-
     writing-mode: vertical-lr;
     display: flex;
     align-items: center;

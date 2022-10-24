@@ -8,7 +8,6 @@ const props = defineProps(["horse", "rank"])
     <td>{{props.horse.speed}} kph</td>
     <td>{{props.horse.time}}</td>
   </tr>
-  <!-- <div class="item">{{horse.name}}</div> -->
 </template>
 <style scoped lang="scss">
 @import '@/assets/scss/variables.scss';
