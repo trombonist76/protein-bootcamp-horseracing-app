@@ -10,7 +10,7 @@ const horseStore = useHorseStore()
 <template>
   <div class="wrapper">
     <Background/>
-    <div class="lane-wrapper">
+    <!-- <div class="lane-wrapper">
 
       <slot name="horses"></slot>
       <div class="lane-wrapper__start" :class="{'slide-left': raceStore.isStarted}">
@@ -21,12 +21,14 @@ const horseStore = useHorseStore()
           <img class="flag" src="@/assets/img/finish.png" alt="">
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <style lang="scss" scoped>
 @import '@/assets/scss/variables.scss';
+@import '@/assets/scss/mixins.scss';
+
 
 .wrapper {
   height: 100%;

@@ -5,34 +5,28 @@ const horseStore = useHorseStore()
 </script>
 <template>
   <div class="leaderboard">
-    <table id="leaderboard">
-      <tr>
-        <th>Rank</th>
-        <th>Horse</th>
-        <th>Speed</th>
-        <th>Time</th>
-      </tr>
-      <LeaderboardItem v-for="(horse, index) in horseStore.leaderboard" :rank="index" :horse="horse" :key="horse.id"></LeaderboardItem>
-    </table>
+    <LeaderboardItem v-for="(horse, index) in horseStore.leaderboard" :rank="index" :horse="horse" :key="horse.id"></LeaderboardItem>
   </div>
 </template>
 <style scoped lang="scss">
 @import '@/assets/scss/variables.scss';
+@import '@/assets/scss/mixins.scss';
 .leaderboard {
   display: flex;
-  gap: 3rem;
-  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 10px;
+  gap: 4px;
+  width: 100%;
+  padding: 1.1rem 1rem;
+  background-color: #ABA89D;
 }
 
-#leaderboard{
-  color: $table-text-color;
-  width: 25%;
-  border-radius: 2rem;
-  text-align: center;
-
-  th{
-    background-color: $table-header-color;
-    padding: 15px;
+@include md{
+  .leaderboard{
+    width: 40%;
+    margin: .5rem 2rem 0 0;
+    align-self: flex-start;    
   }
 }
 </style>
