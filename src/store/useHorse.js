@@ -9,10 +9,7 @@ export const useHorseStore = defineStore('horse', {
     checkAllFinished : (state) => state.horses.every(horse => horse.location >= 100),
     isAnyClosing : (state) => state.horses.some(horse => horse.location >= 70),
     checkAllGoAway : (state) => state.horses.some(horse => horse.location >= 30),
-    leaderboard : (state) => {
-      const raceStore = useRaceStore()
-      return raceStore.isFinished ? state.sortByTime() : state.sortByLocation()
-    }
+    leaderboard : (state) => state.sortHorses()
 
   },
 
@@ -28,18 +25,13 @@ export const useHorseStore = defineStore('horse', {
       })
     },
 
-    sortByLocation(){
+    sortHorses(){
       const rankings = [...this.horses].sort((a,b) => {
         const now = Date.now()
-        const aDiff = (now - a.startedAt) / a.location
-        const bDiff = (now - b.startedAt) / b.location
-        return aDiff - bDiff
+        const aDiff = a.location / (a.time ?? now - a.startedAt)
+        const bDiff = b.location / (b.time ?? now - b.startedAt)
+        return bDiff - aDiff
       })
-      return rankings
-    },
-
-    sortByTime(){
-      const rankings = [...this.horses].sort((a,b) => a.time - b.time)
       return rankings
     },
 
