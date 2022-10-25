@@ -6,11 +6,10 @@ export const useHorseStore = defineStore('horse', {
   state: () => ({horses: getHorses(8)}),
 
   getters: {
-    checkAllFinished : (state) => state.horses.every(horse => horse.location >= 100),
+    checkAllFinished : (state) => state.horses.every(horse => horse.location >= 90),
     isAnyClosing : (state) => state.horses.some(horse => horse.location >= 70),
     checkAllGoAway : (state) => state.horses.some(horse => horse.location >= 30),
     leaderboard : (state) => state.sortHorses()
-
   },
 
   actions: {

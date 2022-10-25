@@ -11,12 +11,15 @@ const horseStore = useHorseStore()
   <div class="wrapper">
     <Background/>
     <div class="lane-wrapper">
+
+      <slot name="horses"></slot>
       <div class="lane-wrapper__start" :class="{'slide-left': raceStore.isStarted}">
         <div>START</div>
       </div>
-      <slot name="horses"></slot>
       <div class="lane-wrapper__finish" :class="{'slide-right': horseStore.isAnyClosing}">
-        <div>FINISH</div>
+        <div>
+          <img class="flag" src="@/assets/img/finish.png" alt="">
+        </div>
       </div>
     </div>
   </div>
@@ -33,7 +36,6 @@ const horseStore = useHorseStore()
 }
 
 .lane-wrapper {
-
   display: flex;
   color: $arena-text-color;
   position: relative;
@@ -48,6 +50,7 @@ const horseStore = useHorseStore()
     font-size: 3rem;
     background-color: $floor-color;
     height: 100%;
+    padding: 0 2rem;
     position: absolute;
     left: 150px;
   }
@@ -57,11 +60,18 @@ const horseStore = useHorseStore()
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 0 4px solid $arena-border-color;
-    width: 0%;
-    letter-spacing: .5rem;
+    letter-spacing: .8rem;
     font-size: 3rem;
-    overflow: hidden;
+    background-color: $floor-color;
+    height: 100%;
+    font-size: 3rem;
+    padding: 0 2rem;
+    position: absolute;
+    right: -10%;
+
+    .flag{
+      height: 7rem;
+    }
   }
 }
 
@@ -72,7 +82,7 @@ const horseStore = useHorseStore()
 }
 
 .slide-right {
-  width: 9%;
+  right: 10%;
   transition: 2s linear;
 }
 

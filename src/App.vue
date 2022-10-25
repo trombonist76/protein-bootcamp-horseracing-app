@@ -37,7 +37,6 @@ const raceStore =  useRaceStore()
 .horses {
   flex: 1;
   width: 100%;
-  position: relative;
   display: flex;
   flex-direction: column;
   border-left: 4px solid white;

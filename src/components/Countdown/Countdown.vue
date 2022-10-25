@@ -15,6 +15,7 @@ import { useCountdownStore } from '@/store/useCountdown';
 .countdown {
   position: absolute;
   inset: 0;
+  z-index: 1;
   background-color: rgba($color: $modal-bg-color, $alpha: .3);
   display: flex;
   align-items: center;

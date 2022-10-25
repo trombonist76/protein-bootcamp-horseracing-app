@@ -6,10 +6,10 @@
   const props = defineProps(["horse"])
   const horseStore = useHorseStore()
   const raceStore =  useRaceStore()
-  const checkRun = computed(() => raceStore.isStarted && props.horse.location < 100)
+  const checkRun = computed(() => raceStore.isStarted && props.horse.location < 90)
 
   watch(() => props.horse.location, () => {
-    if(props.horse.location < 100){
+    if(props.horse.location < 90){
       horseStore.runHorse(props.horse)
       return
     }
@@ -39,6 +39,7 @@
       margin-top: -30px;
       position: absolute;
       transition: left linear .1s;
+      z-index: 1;
     }
   }
 
