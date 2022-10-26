@@ -1,6 +1,6 @@
 <script setup>
 import Leaderboard from '../Leaderboard/Leaderboard.vue';
-import ButtonComp from '@/components/Shared/Button.vue';
+import ButtonComp from '@/components/Button/Button.vue';
 import { useRaceStore } from '@/store/useRace';
 import { useCountdownStore } from '@/store/useCountdown';
 import { useHorseStore } from '@/store/useHorse';
@@ -21,11 +21,13 @@ const resetRaceHandler = () => {
   countdownStore.$reset()
   raceStore.$reset()
   horseStore.$reset()
+  isSliding.value = true
 }
 
 const isSliding = ref(true)
 
 watch(() => horseStore.isAnyClosing, async() => {
+  if(!horseStore.isAnyClosing) return
   await delay(2000)
   isSliding.value = false
 })
@@ -39,7 +41,7 @@ watch(() => horseStore.isAnyClosing, async() => {
           <ButtonComp v-if="!raceStore.isStarted" @click="startRaceHandler" name="Start Race" icon="flag"></ButtonComp>
           <ButtonComp v-if="raceStore.isFinished" @click="resetRaceHandler" name="Restart Race!"></ButtonComp>
         </div>
-          <Leaderboard></Leaderboard>
+          <!-- <Leaderboard></Leaderboard> -->
       </div>
     </div>
 </div>
@@ -47,34 +49,49 @@ watch(() => horseStore.isAnyClosing, async() => {
 
 <style lang="scss" scoped>
 @import '@/assets/scss/variables.scss';
+@import '@/assets/scss/mixins.scss';
 
 .arena,
 .mid,
 .front{
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  perspective: 1000;
-}
-.arena {
-  height: 60%;
-  background: url('@/assets/icons/back.svg');
-  transform: translateZ(0);
-}
+    backface-visibility: hidden;
+  }
+  .arena {
+    height: 60%;
+    background: url('@/assets/icons/back.svg') repeat-x;
+    background-size: cover;
+  }
 
-.front{
-  height: 100%;
-  background: url('@/assets/icons/front.svg');
-  transform: translateZ(0);
-  display: flex;
-  justify-content: space-between;
-}
+  .front{
+    height: 100%;
+    background: url('@/assets/icons/front.svg') repeat-x;
+    background-size: cover;
+    display: flex;
+    justify-content: space-between;
+  }
 
-.mid{
-  height: 100%;
-  background: url('@/assets/icons/mid.svg');
-  transform: translateZ(0);
-}
+  .mid{
+    height: 100%;
+    background: url('@/assets/icons/mid.svg') repeat-x;
+    background-size: cover;
+  }
 
+
+
+@include xl{
+  .arena {
+    height: 50%;
+    background-size: contain;
+  }
+
+  .front{
+    background-size: contain;
+  }
+
+  .mid{
+    background-size: contain;
+  }
+}
 
 .buttons{
   margin-left: 2rem;
@@ -84,36 +101,23 @@ watch(() => horseStore.isAnyClosing, async() => {
 }
 
 .sliding-arena{
-  animation: bg-arena 45s linear infinite;
+  animation: slide-arena 45s linear infinite;
 }
 
 .sliding-mid{
-  animation: bg-mid 30s linear infinite;
+  animation: slide-mid 30s linear infinite;
 }
 
 .sliding-front{
-  animation: bg-front 15s linear infinite;
+  animation: slide-front 15s linear infinite;
 }
 
 .paused{
   animation-play-state: paused;
 }
 
-@keyframes bg-arena {
-  100% {
-    background-position: -200% 0;
-  }
-}
 
-@keyframes bg-mid {
-  100% {
-    background-position: -400% 0;
-  }
-}
-
-@keyframes bg-front {
-  100% {
-    background-position: -600% 0;
-  }
-}
+@include animation-mixin(slide-arena, 200%);
+@include animation-mixin(slide-mid, 400%);
+@include animation-mixin(slide-front, 600%);
 </style>

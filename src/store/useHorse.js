@@ -7,8 +7,8 @@ export const useHorseStore = defineStore('horse', {
 
   getters: {
     checkAllFinished : (state) => state.horses.every(horse => horse.location >= 90),
-    isAnyClosing : (state) => state.horses.some(horse => horse.location >= 70),
     checkAllGoAway : (state) => state.horses.some(horse => horse.location >= 30),
+    isAnyClosing : (state) => state.horses.some(horse => horse.location >= 70),
     leaderboard : (state) => state.sortHorses()
   },
 

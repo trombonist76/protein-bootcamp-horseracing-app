@@ -34,9 +34,8 @@
     position: relative;
 
     &__img{
-      height: 5rem;
-      margin-left: 40px;
-      margin-top: -30px;
+      height: 4rem;
+      margin-top: -2rem;
       position: absolute;
       transition: left linear .1s;
       z-index: 1;

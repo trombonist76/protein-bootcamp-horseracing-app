@@ -17,7 +17,7 @@ $xlarge-desktop-width: 1536px;
 }
 
 @mixin lg {
-  @media (min-width: #{$desktop-width}){
+  @media (min-width: #{$desktop-width}) {
     @content;
   }
 }
@@ -29,8 +29,23 @@ $xlarge-desktop-width: 1536px;
 }
 
 @mixin xxl {
-  @media (min-width: #{$xlarge-desktop-width}){
+  @media (min-width: #{$xlarge-desktop-width}) {
     @content;
   }
 }
 
+@mixin animation-mixin($name, $to) {
+  @keyframes #{$name} {
+    100% {
+      background-position: $to 0;
+    }
+  }
+
+  @include xl {
+    @keyframes #{$name} {
+      100% {
+        background-position: -$to 0;
+      }
+    }
+  }
+}
