@@ -19,8 +19,8 @@
 </script>
 
 <template>
-  <div class="horse-wrapper">
-    {{horse.id}}
+  <div class="lane-wrapper">
+    <span class="lane-wrapper__number">{{horse.id}}</span>
     <div class="horse">
       <img class="horse__img" v-if="!checkRun" :style="{left: `${props.horse.location}%`}" src="/src/assets/img/horse-standing.png" alt="Standing Horse">
       <img class="horse__img" v-else  :style="{left: `${props.horse.location}%`}" src="/src/assets/img/horse-running.gif" alt="Running Horse">
@@ -30,17 +30,15 @@
 
 <style lang="scss" scoped>
 
-  .horse-wrapper{
+  .lane-wrapper{
     display: flex;
     gap: 2rem;
     font-size: 3rem;
     flex: 1;
-  }
-  .horse{
+    .horse{
     position: relative;
     flex: 1;
     
-
     &__img{
       height: 4rem;
       margin-top: -1%;
@@ -49,5 +47,5 @@
       z-index: 1;
     }
   }
-
+}
 </style>

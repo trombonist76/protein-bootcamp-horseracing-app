@@ -16,14 +16,14 @@ import { useCountdownStore } from '@/store/useCountdown';
   position: absolute;
   inset: 0;
   z-index: 1;
-  background-color: rgba($color: $modal-bg-color, $alpha: .3);
   display: flex;
   align-items: center;
   justify-content: center;
 
   &__circle {
-    height: 300px;
-    width: 300px;
+    height: 15rem;
+    width: 15rem;
+    border: 3px solid;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -43,7 +43,7 @@ import { useCountdownStore } from '@/store/useCountdown';
 
     60% {
       transform: scale(1.5);
-      box-shadow: 0 0 0 200px rgba(0, 0, 0, 0);
+      box-shadow: 0 0 0 9rem rgba(0, 0, 0, 0);
     }
 
     100% {
