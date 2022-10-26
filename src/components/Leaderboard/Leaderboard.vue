@@ -17,16 +17,14 @@ const horseStore = useHorseStore()
   justify-content: center;
   border-radius: 10px;
   gap: 4px;
-  width: 100%;
   padding: 1.1rem 1rem;
-  background-color: #ABA89D;
 }
 
-@include md{
-  .leaderboard{
-    width: 40%;
-    margin: .5rem 2rem 0 0;
-    align-self: flex-start;    
-  }
-}
+// @include md{
+//   .leaderboard{
+//     width: 40%;
+//     margin: .5rem 2rem 0 0;
+//     align-self: flex-start;    
+//   }
+// }
 </style>

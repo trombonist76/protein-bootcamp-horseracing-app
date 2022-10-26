@@ -27,7 +27,7 @@ const horseStore = useHorseStore()
     height: 100%;
     font-size: 3rem;
     padding: 0 2rem;
-    right: -10%;
+    right: -10rem;
     position: absolute;
   }
 

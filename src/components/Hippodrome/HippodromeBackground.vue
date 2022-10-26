@@ -1,4 +1,5 @@
 <script setup>
+
 import Leaderboard from '../Leaderboard/Leaderboard.vue';
 import ButtonComp from '@/components/Button/Button.vue';
 import { useRaceStore } from '@/store/useRace';
@@ -41,7 +42,7 @@ watch(() => horseStore.isAnyClosing, async() => {
           <ButtonComp v-if="!raceStore.isStarted" @click="startRaceHandler" name="Start Race" icon="flag"></ButtonComp>
           <ButtonComp v-if="raceStore.isFinished" @click="resetRaceHandler" name="Restart Race!"></ButtonComp>
         </div>
-          <!-- <Leaderboard></Leaderboard> -->
+          <Leaderboard></Leaderboard>
       </div>
     </div>
 </div>
@@ -55,37 +56,40 @@ watch(() => horseStore.isAnyClosing, async() => {
 .mid,
 .front{
     backface-visibility: hidden;
-  }
+}
+.arena {
+  height: 60%;
+  background: url('@/assets/icons/back.svg') repeat-x;
+  background-size: cover;
+}
+
+.front{
+  height: 100%;
+  background: url('@/assets/icons/front.svg') repeat-x;
+  background-size: cover;
+  display: flex;
+  justify-content: space-between;
+}
+
+.mid{
+  height: 100%;
+  background: url('@/assets/icons/mid.svg') repeat-x;
+  background-size: cover;
+}
+
+
+
+@include xxl{
   .arena {
-    height: 60%;
-    background: url('@/assets/icons/back.svg') repeat-x;
-    background-size: cover;
+    height: 42%;
+    background-size: contain;
   }
 
   .front{
-    height: 100%;
-    background: url('@/assets/icons/front.svg') repeat-x;
-    background-size: cover;
-    display: flex;
+    background-size: contain;
+    flex-direction: row;
     justify-content: space-between;
-  }
 
-  .mid{
-    height: 100%;
-    background: url('@/assets/icons/mid.svg') repeat-x;
-    background-size: cover;
-  }
-
-
-
-@include xl{
-  .arena {
-    height: 50%;
-    background-size: contain;
-  }
-
-  .front{
-    background-size: contain;
   }
 
   .mid{
@@ -97,7 +101,7 @@ watch(() => horseStore.isAnyClosing, async() => {
   margin-left: 2rem;
   display: flex;
   align-items: center;
-  justify-content: center;
+  flex: 1;
 }
 
 .sliding-arena{

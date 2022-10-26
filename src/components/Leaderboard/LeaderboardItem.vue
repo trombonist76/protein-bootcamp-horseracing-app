@@ -2,6 +2,7 @@
 import { computed } from 'vue';
 
 const props = defineProps(["horse", "rank"])
+const showTrophy = computed(() => props.rank < 3)
 const rankClass = computed(() => ({
   "first": props.rank + 1 === 1,
   "second": props.rank + 1 === 2,
@@ -10,38 +11,73 @@ const rankClass = computed(() => ({
 </script>
 <template>
   <div class="item" :class="rankClass">
-    <span class="item__spec">{{props.rank + 1}}</span>
-    <span class="item__spec">{{props.horse.name}}</span>
-    <span class="item__spec">{{props.horse.speed}} kph</span>
-    <span class="item__spec">{{props.horse.time}}</span>
+    <div class="item__trophy">
+      <b>
+        <i v-if="showTrophy" class="ri-trophy-line"></i>
+        <span v-else class="spec">{{ props.rank + 1 }}</span>
+      </b>
+      
+    </div>
+    <div class="item__specs">
+      <span class="spec"><b>{{ props.horse.name }}</b></span>
+      <span class="spec speed">
+        {{ props.horse.speed }} kph</span>
+    </div>
+
   </div>
 </template>
 <style scoped lang="scss">
 @import '@/assets/scss/variables.scss';
+@import '@/assets/scss/mixins.scss';
 
-.item{
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr 1fr;
-  gap: 1rem;
-  padding: 10px 10px;
-  border-radius: 5px;
-  font-size: 1rem;
+.item {
+  display: flex;
   background-color: $not-in-top;
+  padding: 0 .6rem;
+  width: 8rem;
+  height: 3.7rem;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 5px;
 
-  &__spec{
-    flex: 1;
+  @include md {
+    padding: 0 .6rem;
+    width: 8rem;
+    height: 4rem;
   }
+
+  @include lg {
+    padding: 0 .6rem;
+    width: 9rem;
+    height: 2.7rem;
+  }
+
+  &__specs {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    font-size: .8rem;
+    border-radius: 5px;
+  }
+
+  &__trophy {
+    width: 1rem;
+    font-size: .9rem;
+    margin: auto;
+  }
+
 }
 
-.first{
-    background-color: $first-bg-color;
-  }
+.first {
+  background-color: $first-bg-color;
+}
 
-  .second{
-    background-color: $second-bg-color;
-  }
+.second {
+  background-color: $second-bg-color;
+}
 
-  .third{
-    background-color: $third-bg-color;
-  }
+.third {
+  background-color: $third-bg-color;
+}
 </style>

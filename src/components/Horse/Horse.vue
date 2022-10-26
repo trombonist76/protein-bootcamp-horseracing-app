@@ -19,23 +19,31 @@
 </script>
 
 <template>
-  <div class="horse">
+  <div class="horse-wrapper">
     {{horse.id}}
-    <img class="horse__img" v-if="!checkRun" :style="{left: `${props.horse.location}%`}" src="/src/assets/img/horse-standing.png" alt="Standing Horse">
-    <img class="horse__img" v-else  :style="{left: `${props.horse.location}%`}" src="/src/assets/img/horse-running.gif" alt="Running Horse">
+    <div class="horse">
+      <img class="horse__img" v-if="!checkRun" :style="{left: `${props.horse.location}%`}" src="/src/assets/img/horse-standing.png" alt="Standing Horse">
+      <img class="horse__img" v-else  :style="{left: `${props.horse.location}%`}" src="/src/assets/img/horse-running.gif" alt="Running Horse">
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-  .horse{
+
+  .horse-wrapper{
+    display: flex;
+    gap: 2rem;
     font-size: 3rem;
-    width: 100%;
-    height: 4.4rem;
+    flex: 1;
+  }
+  .horse{
     position: relative;
+    flex: 1;
+    
 
     &__img{
       height: 4rem;
-      margin-top: -2rem;
+      margin-top: -1%;
       position: absolute;
       transition: left linear .1s;
       z-index: 1;

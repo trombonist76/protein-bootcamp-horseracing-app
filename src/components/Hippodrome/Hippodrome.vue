@@ -15,7 +15,7 @@ const horseStore = useHorseStore()
     <Background/>
     <div class="lane-wrapper">
       <div class="horses" :class="{'slide' : raceStore.isStarted}">
-          <Horse class="horse" v-for="horse in horseStore.horses" :key="horse.id" :horse="horse"/>
+          <Horse class="item" v-for="horse in horseStore.horses" :key="horse.id" :horse="horse"/>
       </div>
       <ArenaStart></ArenaStart>
       <ArenaFinish></ArenaFinish>
@@ -37,20 +37,19 @@ const horseStore = useHorseStore()
 
 .lane-wrapper {
   display: flex;
+  flex: 1;
   color: $arena-text-color;
   background-color: $floor-color;
   position: relative;
 
   .horses {
-    flex: 1;
     width: 100%;
     display: flex;
     flex-direction: column;
     border-left: 4px solid white;
-    border-right: 4px solid white;
-    }
-     .horse:not(:last-child){
-      border-bottom: 4px solid white;
+      .item:not(:last-child){
+        border-bottom: 4px solid white;
+      }
     }
   }
 
