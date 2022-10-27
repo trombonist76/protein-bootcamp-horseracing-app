@@ -22,7 +22,7 @@ export const useRaceStore = defineStore('race',{
       const horseStore = useHorseStore()
       await countdownStore.startCountdown()
       this.isStarted = true
-      this.isBackGroundSliding = true
+      this.isBackgroundSliding = true
       horseStore.startHorsesToRace()
     },
 

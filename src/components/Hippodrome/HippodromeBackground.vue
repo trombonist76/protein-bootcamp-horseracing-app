@@ -36,7 +36,7 @@ watch(() => horseStore.isAnyClosing, async() => {
           <ButtonComp v-if="showStartButton" @click="startHandler" name="Start Race" icon="flag"></ButtonComp>
           <ButtonComp v-if="raceStore.isFinished" @click="restartHandler" name="Restart Race!"></ButtonComp>
         </div>
-          <Leaderboard></Leaderboard>
+          <Leaderboard v-if="raceStore.isStarted"></Leaderboard>
       </div>
     </div>
 </div>

@@ -1,16 +1,32 @@
 <script setup>
-import {useHorseStore} from "@/store/useHorse"
 import LeaderboardItem from "./LeaderboardItem.vue";
+import { useHorseStore } from "@/store/useHorse"
+import { onMounted, onUnmounted, ref } from "vue";
 const horseStore = useHorseStore()
+const leaderboard = ref(null)
+
+let interval = ref(null)
+
+onMounted(() => {
+  interval.value = setInterval(() => {
+    leaderboard.value = horseStore.leaderboard
+  },500)
+})
+
+onUnmounted(() => {
+  clearInterval(interval.value)
+})
+
 </script>
 <template>
-  <div class="leaderboard">
-    <LeaderboardItem v-for="(horse, index) in horseStore.leaderboard" :rank="index" :horse="horse" :key="horse.id"></LeaderboardItem>
-  </div>
+  <TransitionGroup tag="ul" name="fade" class="leaderboard">
+    <LeaderboardItem v-for="(horse, index) in leaderboard" :rank="index" :horse="horse" :key="horse.id"></LeaderboardItem>
+  </TransitionGroup>
 </template>
 <style scoped lang="scss">
 @import '@/assets/scss/variables.scss';
 @import '@/assets/scss/mixins.scss';
+
 .leaderboard {
   display: flex;
   flex-direction: column;
@@ -20,11 +36,9 @@ const horseStore = useHorseStore()
   padding: 1.1rem 1rem;
 }
 
-// @include md{
-//   .leaderboard{
-//     width: 40%;
-//     margin: .5rem 2rem 0 0;
-//     align-self: flex-start;    
-//   }
-// }
+.fade-move,
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+}
 </style>
