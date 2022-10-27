@@ -16,7 +16,7 @@ export const useCountdownStore = defineStore('counter', {
       this.isStarted = true
       const interval = setInterval(() => {
         this.countdown --
-      },1000)
+      }, 999)
       
       await delay(3000)
       clearInterval(interval)

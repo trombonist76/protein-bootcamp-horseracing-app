@@ -3,7 +3,7 @@ import { getHorses, getRandomSpeed, speedMultiplier} from "@/utils"
 import { useRaceStore } from './useRace'
 
 export const useHorseStore = defineStore('horse', {
-  state: () => ({horses: getHorses(8)}),
+  state: () => ({horses: getHorses()}),
 
   getters: {
     checkAllFinished : (state) => state.horses.every(horse => horse.location >= 90),
@@ -19,7 +19,7 @@ export const useHorseStore = defineStore('horse', {
           ...horse, 
           startedAt: Date.now(),
           speed: getRandomSpeed(),
-          location: 0
+          location: 1
         }
       })
     },

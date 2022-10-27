@@ -29,9 +29,9 @@ watch(() => horseStore.isAnyClosing, async() => {
 
 </script>
 <template>
-  <div class="arena" :class="{'sliding-arena': raceStore.isStarted, 'paused': !raceStore.isBackGroundSliding}">    
-    <div class="mid" :class="{'sliding-mid': raceStore.isStarted, 'paused': !raceStore.isBackGroundSliding}">
-      <div class="front" :class="{'sliding-front': raceStore.isStarted, 'paused': !raceStore.isBackGroundSliding}">
+  <div class="arena" :class="{'sliding-arena': raceStore.isStarted, 'paused': !raceStore.isBackgroundSliding}">    
+    <div class="mid" :class="{'sliding-mid': raceStore.isStarted, 'paused': !raceStore.isBackgroundSliding}">
+      <div class="front" :class="{'sliding-front': raceStore.isStarted, 'paused': !raceStore.isBackgroundSliding}">
         <div class="buttons">
           <ButtonComp v-if="showStartButton" @click="startHandler" name="Start Race" icon="flag"></ButtonComp>
           <ButtonComp v-if="raceStore.isFinished" @click="restartHandler" name="Restart Race!"></ButtonComp>

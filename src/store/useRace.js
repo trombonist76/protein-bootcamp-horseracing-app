@@ -6,7 +6,7 @@ import { useCountdownStore } from './useCountdown'
 export const useRaceStore = defineStore('race',{
   state: () => ({
     isStarted: false,
-    isBackGroundSliding: false
+    isBackgroundSliding: false
   }),
 
   getters: {
@@ -35,7 +35,7 @@ export const useRaceStore = defineStore('race',{
     },
 
     pauseBackground(){
-      this.isBackGroundSliding = false
+      this.isBackgroundSliding = false
     },
 
   }

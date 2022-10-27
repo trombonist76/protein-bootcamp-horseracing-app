@@ -1,15 +1,15 @@
-export function getHorses(count = 8) {
+export function getHorses() {
   const horseNames = [
     "Yadigar", "Ekselans", "Kehribar",  
     "Alaca", "Gelincik", "Rüzgar", "Gölge", "Karamel"
   ]
   const horses = [];
 
-  for (let i = 0; i < count; i++) {
+  for (let i = 0; i < 8; i++) {
     const horse = {
       id: i + 1,
       name: horseNames.at(i),
-      location: 1,
+      location: 0,
       speed: 0,
       startedAt: null,
       finishedAt: null,
