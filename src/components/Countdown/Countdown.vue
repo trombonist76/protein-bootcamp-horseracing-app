@@ -15,7 +15,7 @@ import { useCountdownStore } from '@/store/useCountdown';
 .countdown {
   position: absolute;
   inset: 0;
-  z-index: 1;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;

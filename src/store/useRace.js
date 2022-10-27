@@ -1,9 +1,12 @@
 import { defineStore } from 'pinia'
 import { useHorseStore } from './useHorse'
+import { useCountdownStore } from './useCountdown'
+
 
 export const useRaceStore = defineStore('race',{
   state: () => ({
-    isStarted: false
+    isStarted: false,
+    isBackGroundSliding: false
   }),
 
   getters: {
@@ -14,8 +17,26 @@ export const useRaceStore = defineStore('race',{
   },
 
   actions: {
-    startRace(){
+    async startRace(){
+      const countdownStore = useCountdownStore()
+      const horseStore = useHorseStore()
+      await countdownStore.startCountdown()
       this.isStarted = true
-    }
+      this.isBackGroundSliding = true
+      horseStore.startHorsesToRace()
+    },
+
+    resetRace(){
+      const horseStore = useHorseStore()
+      const countdownStore = useCountdownStore()
+      this.isStarted = false
+      countdownStore.$reset()
+      horseStore.$reset()
+    },
+
+    pauseBackground(){
+      this.isBackGroundSliding = false
+    },
+
   }
 })

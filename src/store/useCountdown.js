@@ -6,21 +6,21 @@ export const useCountdownStore = defineStore('counter', {
   state: () => ({
     initialCountdown: 3,
     countdown: 3,
-    isCountdownStarted: false
+    isStarted: false
   }),
 
   actions: {
     async startCountdown(){
       if (this.countdown !== this.initialCountdown) return
   
-      this.isCountdownStarted = true
+      this.isStarted = true
       const interval = setInterval(() => {
         this.countdown --
       },1000)
       
       await delay(3000)
       clearInterval(interval)
-      this.isCountdownStarted = false
+      this.isStarted = false
     },
 
     resetCountdown(){

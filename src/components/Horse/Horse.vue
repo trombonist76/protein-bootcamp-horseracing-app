@@ -21,9 +21,9 @@
 <template>
   <div class="lane-wrapper">
     <span class="lane-wrapper__number">{{horse.id}}</span>
-    <div class="horse">
-      <img class="horse__img" v-if="!checkRun" :style="{left: `${props.horse.location}%`}" src="/src/assets/img/horse-standing.png" alt="Standing Horse">
-      <img class="horse__img" v-else  :style="{left: `${props.horse.location}%`}" src="/src/assets/img/horse-running.gif" alt="Running Horse">
+    <div class="horse" >
+      <img class="horse__img"  v-if="!checkRun" :style="{left: `${props.horse.location}%`}" src="/src/assets/img/horse-standing.png" alt="Standing Horse">
+      <img class="horse__img running" v-else  :style="{left: `${props.horse.location}%`}" src="/src/assets/img/horse-running.gif" alt="Running Horse">
     </div>
   </div>
 </template>
@@ -43,8 +43,11 @@
       height: 4rem;
       margin-top: -1%;
       position: absolute;
-      transition: left linear .1s;
       z-index: 1;
+    }
+
+    .running{
+      transition: left linear .1s;
     }
   }
 }

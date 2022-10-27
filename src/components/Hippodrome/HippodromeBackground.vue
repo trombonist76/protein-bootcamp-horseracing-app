@@ -5,42 +5,36 @@ import ButtonComp from '@/components/Button/Button.vue';
 import { useRaceStore } from '@/store/useRace';
 import { useCountdownStore } from '@/store/useCountdown';
 import { useHorseStore } from '@/store/useHorse';
-import { ref, watch} from 'vue';
+import { computed, watch} from 'vue';
 import {delay} from "@/utils"
 
-const countdownStore = useCountdownStore()
 const raceStore =  useRaceStore()
 const horseStore = useHorseStore()
-
-const startRaceHandler = async () => {
-  await countdownStore.startCountdown()
+const countdownStore = useCountdownStore()
+const showStartButton = computed(() => !raceStore.isStarted && !countdownStore.isStarted)
+const startHandler = async () => {
   raceStore.startRace()
-  horseStore.startHorsesToRace()
 }
 
-const resetRaceHandler = () => {
-  countdownStore.$reset()
-  raceStore.$reset()
-  horseStore.$reset()
-  isSliding.value = true
+const restartHandler = () => {
+  raceStore.resetRace()
+  raceStore.startRace()
 }
-
-const isSliding = ref(true)
 
 watch(() => horseStore.isAnyClosing, async() => {
   if(!horseStore.isAnyClosing) return
   await delay(2000)
-  isSliding.value = false
+  raceStore.pauseBackground()
 })
 
 </script>
 <template>
-  <div class="arena" :class="{'sliding-arena': raceStore.isStarted, 'paused': !isSliding}">    
-    <div class="mid" :class="{'sliding-mid': raceStore.isStarted, 'paused': !isSliding}">
-      <div class="front" :class="{'sliding-front': raceStore.isStarted, 'paused': !isSliding}">
+  <div class="arena" :class="{'sliding-arena': raceStore.isStarted, 'paused': !raceStore.isBackGroundSliding}">    
+    <div class="mid" :class="{'sliding-mid': raceStore.isStarted, 'paused': !raceStore.isBackGroundSliding}">
+      <div class="front" :class="{'sliding-front': raceStore.isStarted, 'paused': !raceStore.isBackGroundSliding}">
         <div class="buttons">
-          <ButtonComp v-if="!raceStore.isStarted" @click="startRaceHandler" name="Start Race" icon="flag"></ButtonComp>
-          <ButtonComp v-if="raceStore.isFinished" @click="resetRaceHandler" name="Restart Race!"></ButtonComp>
+          <ButtonComp v-if="showStartButton" @click="startHandler" name="Start Race" icon="flag"></ButtonComp>
+          <ButtonComp v-if="raceStore.isFinished" @click="restartHandler" name="Restart Race!"></ButtonComp>
         </div>
           <Leaderboard></Leaderboard>
       </div>
