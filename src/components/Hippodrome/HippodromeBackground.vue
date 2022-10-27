@@ -6,7 +6,7 @@ import { useRaceStore } from '@/store/useRace';
 import { useCountdownStore } from '@/store/useCountdown';
 import { useHorseStore } from '@/store/useHorse';
 import { computed, watch} from 'vue';
-import {delay} from "@/utils"
+import { delay } from "@/utils"
 
 const raceStore =  useRaceStore()
 const horseStore = useHorseStore()
@@ -78,42 +78,33 @@ watch(() => horseStore.isAnyClosing, async() => {
     height: 42%;
     background-size: contain;
   }
-
   .front{
     background-size: contain;
     flex-direction: row;
     justify-content: space-between;
-
   }
-
   .mid{
     background-size: contain;
   }
 }
-
 .buttons{
   margin-left: 2rem;
   display: flex;
   align-items: center;
   flex: 1;
 }
-
 .sliding-arena{
   animation: slide-arena 45s linear infinite;
 }
-
 .sliding-mid{
   animation: slide-mid 30s linear infinite;
 }
-
 .sliding-front{
   animation: slide-front 15s linear infinite;
 }
-
 .paused{
   animation-play-state: paused;
 }
-
 
 @include animation-mixin(slide-arena, 200%);
 @include animation-mixin(slide-mid, 400%);
