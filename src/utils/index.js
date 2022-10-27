@@ -13,6 +13,7 @@ export function getHorses() {
       speed: 0,
       startedAt: null,
       finishedAt: null,
+      isSelected: false,
       time: null,
     };
 

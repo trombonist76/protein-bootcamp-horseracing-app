@@ -33,7 +33,6 @@ const closeHandler = () => {
 @import '@/assets/scss/variables.scss';
 @import '@/assets/scss/mixins.scss';
 
-
 .wrapper{
   position: absolute;
   inset: 0;

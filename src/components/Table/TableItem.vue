@@ -1,0 +1,60 @@
+<script setup>
+import { ref } from 'vue';
+import ButtonComp from "@/components/Button/Button.vue"
+  const props = defineProps(["horse"])
+  const emits = defineEmits(["selectHorse"])
+  const fileExtension = ref("png")
+
+  const changeImageHandler = () => {
+    fileExtension.value = fileExtension.value === "png" ? "gif" : "png" 
+  }
+
+  const selectHandler = () => {
+    emits("selectHorse", props.horse)
+  }
+</script>
+
+<template>
+  <div class="item">
+    <div class="image" @mouseover="changeImageHandler" @mouseout="changeImageHandler">
+      <img :src="`/src/assets/img/horse-${props.horse.id}.${fileExtension}`" class="image__horse" alt="horse-image">
+    </div>
+    <b class="item__name">{{props.horse.name}}</b>
+    <ButtonComp @click="selectHandler" name="Select Horse"></ButtonComp>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+@import '@/assets/scss/variables.scss';
+
+  .item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 1rem;
+    height: 18rem;
+    gap: .7rem;
+    border: 1px solid $border-color;
+    background-color: #ccd5ae;
+    border-radius: .3rem;
+    -webkit-box-shadow: 7px 10px 23px -10px rgba(0,0,0,0.75);
+    -moz-box-shadow: 7px 10px 23px -10px rgba(0,0,0,0.75);
+    box-shadow: 7px 10px 23px -10px rgba(0,0,0,0.75);
+
+    .image{
+      width: 100%;
+      border: 1px solid;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #fefae0;
+      border-radius: .3rem;
+
+      flex:1;
+
+      &__horse{
+        width: 9rem;
+      }
+    }
+  }
+</style>  

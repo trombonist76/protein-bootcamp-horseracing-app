@@ -8,6 +8,7 @@ export const useHorseStore = defineStore('horse', {
   getters: {
     checkAllFinished : (state) => state.horses.every(horse => horse.location >= 90),
     checkAllGoAway : (state) => state.horses.some(horse => horse.location >= 30),
+    checkAnySelected: (state) => state.horses.find(horse => horse.isSelected),
     isAnyClosing : (state) => state.horses.some(horse => horse.location >= 70),
     leaderboard : (state) => state.sortHorses()
   },
@@ -59,6 +60,11 @@ export const useHorseStore = defineStore('horse', {
       horse.speed = 0
       horse.finishedAt = now
       horse.time = diff
-    }
+    },
+
+    selectHorse(selectedHorse){
+      const horse = this.findHorse(selectedHorse)
+      horse.isSelected = true
+    } 
   }
 })
