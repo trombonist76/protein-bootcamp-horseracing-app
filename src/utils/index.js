@@ -1,10 +1,14 @@
 export function getHorses(count = 8) {
+  const horseNames = [
+    "Yadigar", "Ekselans", "Kehribar",  
+    "Alaca", "Gelincik", "Rüzgar", "Gölge", "Karamel"
+  ]
   const horses = [];
 
   for (let i = 0; i < count; i++) {
     const horse = {
       id: i + 1,
-      name: `Horse ${i + 1}`,
+      name: horseNames.at(i),
       location: 1,
       speed: 0,
       startedAt: null,
@@ -32,7 +36,7 @@ export function getRandomSpeed(min = 20, max = 40) {
 export function speedMultiplier(
   speed,
   deviation = 0.05,
-  minBetween = 20,
+  minBetween = 30,
   maxBetween = 40
 ) {
   const max =  (1 + deviation) * speed 

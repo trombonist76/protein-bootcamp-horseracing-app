@@ -14,7 +14,7 @@ const horseStore = useHorseStore()
   <div class="wrapper">
     <Background/>
     <div class="lane-wrapper">
-      <div class="horses" :class="{'slide' : raceStore.isStarted}">
+      <div class="horses">
           <Horse class="item" v-for="horse in horseStore.horses" :key="horse.id" :horse="horse"/>
       </div>
       <ArenaStart></ArenaStart>
@@ -53,13 +53,13 @@ const horseStore = useHorseStore()
     }
   }
 
-@keyframes slide {
-  0% {
-    transform: translate3d(0, 0, 0);
-  }
+// @keyframes slide {
+//   0% {
+//     transform: translate3d(0, 0, 0);
+//   }
 
-  100% {
-    transform: translate3d(-33%, 0, 0);
-  }
-}
+//   100% {
+//     transform: translate3d(-33%, 0, 0);
+//   }
+// }
 </style>
