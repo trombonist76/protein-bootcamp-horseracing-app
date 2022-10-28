@@ -2,7 +2,7 @@
 
 
 ## :books: **Introduction** 
----
+
 
 This repo is a web application that simulates horse racing and was created according to the task given in the **Protein Vuejs Bootcamp**.
 
@@ -15,7 +15,7 @@ This repo is a web application that simulates horse racing and was created accor
 <br>
 
 ## :briefcase: **Task**
----
+
 
 1. Real-time race of horses running in 8 different lanes on a straight route.
 2. After pressing the start button, the countdown is shown and then the horses start from the starting point to the race.
@@ -30,7 +30,7 @@ depending on the design, the leaderboard is located anywhere on the screen.
 9. At the bottom of the list of results is a restart button and when is clicked the button, the app is returns where ready to start of race.
 
 ### :framed_picture: **A. UI**
----
+
 
 **UI should contain as a minimum.**
 * Start Button
@@ -46,7 +46,7 @@ depending on the design, the leaderboard is located anywhere on the screen.
 <br>
 
 ## :film_strip: **Preview**
----
+
 ![Race Start Video](/src//assets/readme-img/gif-1.gif "Gif-1")
 ![Race Finish Video](/src//assets/readme-img/gif-2.gif "Gif-2")
 
@@ -54,7 +54,6 @@ depending on the design, the leaderboard is located anywhere on the screen.
 
 ## :bookmark_tabs: **Features**
 > In addition to the assigned tasks, the following features have been added 
----
 ### **A. Parallax Background**
  Three layered background was used that moves against the direction the horses are running from the start of the race to the end of the race. Also, in order to be close to reality, after the race starts, the starting line shifts to the left and disappears. Likewise, when any horse completes 70% of the race at the finish line, the finish line slides from the invisible area towards the screen and stops.
 
@@ -62,7 +61,6 @@ depending on the design, the leaderboard is located anywhere on the screen.
 The user selects a horse before the race starts and view the ranking of the selected horse on the leaderboard during the race and at the end of the race and the user can change selected horse at the end of the race or start to new race with the same horse by clicking restart button.
 
 ## :running_man: **Quick Start**
----
 
 ### **A. Clone the repository and install dependencies**
 
