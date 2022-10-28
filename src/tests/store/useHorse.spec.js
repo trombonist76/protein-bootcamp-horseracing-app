@@ -28,4 +28,11 @@ describe('Horse Store', () => {
     expect(horse.speed).not.to.equal(0)
   })
 
+  it('Select a horse', () => {
+    const horseStore = useHorseStore()
+    const horse = horseStore.findHorse(3)
+    horseStore.selectHorse(horse)
+    expect(horseStore.checkAnySelected.id).toBe(3)
+  })
+
 })

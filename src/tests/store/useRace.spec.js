@@ -12,7 +12,7 @@ describe('Race Store', () => {
     const raceStore = useRaceStore()
     const countdownStore = useCountdownStore()
     await raceStore.startRace()
-    expect(countdownStore.countdown).toEqual(0)
+    expect(countdownStore.countdown).toEqual(1)
     expect(raceStore.isStarted).toBe(true)
     expect(raceStore.isBackgroundSliding).toBe(true)
   })

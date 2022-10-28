@@ -10,7 +10,7 @@ describe('Countdown Store', () => {
     const countdownStore = useCountdownStore()
     expect(countdownStore.countdown).toBe(3)
     await countdownStore.startCountdown()
-    expect(countdownStore.countdown).toBe(0)
+    expect(countdownStore.countdown).toBe(1)
   })
 
   it('Reset Countdown', () => {
