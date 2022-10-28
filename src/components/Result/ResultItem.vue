@@ -4,7 +4,8 @@ import { computed } from 'vue';
 const props = defineProps(["result", "rank"])
 const checkInTop = computed(() => props.rank < 3)
 const medals = ["gold", "silver", "bronze"]
-const imagePath = computed(() => `/src/assets/img/${medals.at(props.rank)}-medal.png`)
+const imagePath = computed(() => new URL(`/src/assets/img/${medals.at(props.rank)}-medal.png`, import.meta.url).href)
+
 const topClass = computed(() => ({
   "top first": props.rank === 0,
   "top second": props.rank === 1,
