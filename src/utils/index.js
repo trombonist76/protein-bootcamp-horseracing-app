@@ -1,19 +1,29 @@
-export function getHorses() {
+import {getSelectedHorse} from "@/service/local"
+
+const getHorseNames = () => {
   const horseNames = [
     "Yadigar", "Ekselans", "Kehribar",  
     "Alaca", "Gelincik", "Rüzgar", "Gölge", "Karamel"
   ]
+  return horseNames
+}
+
+
+export function getHorses() {
   const horses = [];
+  const names = getHorseNames()
+  const selectedHorse = getSelectedHorse()
 
   for (let i = 0; i < 8; i++) {
+    const isSelected = selectedHorse?.id === i + 1
     const horse = {
       id: i + 1,
-      name: horseNames.at(i),
+      name: names.at(i),
       location: 0,
       speed: 0,
       startedAt: null,
       finishedAt: null,
-      isSelected: false,
+      isSelected: isSelected,
       time: null,
     };
 

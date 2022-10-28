@@ -14,7 +14,7 @@ describe('Race Store', () => {
     await raceStore.startRace()
     expect(countdownStore.countdown).toEqual(0)
     expect(raceStore.isStarted).toBe(true)
-    expect(raceStore.isBackGroundSliding).toBe(true)
+    expect(raceStore.isBackgroundSliding).toBe(true)
   })
 
   it('Reset Race', () => {

@@ -1,6 +1,7 @@
 <script setup>
 import { useHorseStore } from '@/store/useHorse'
 import { useRaceStore } from '@/store/useRace'
+import { removeSelectedHorse } from '@/service/local'
 import ResultItem from './ResultItem.vue';
 import ButtonComp from '@/components/Button/Button.vue';
 const horseStore = useHorseStore()
@@ -12,6 +13,7 @@ const restartHandler = () => {
 }
 
 const closeHandler = () => {
+  removeSelectedHorse()
   raceStore.resetRace()
 }
 

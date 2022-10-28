@@ -26,6 +26,7 @@ import ButtonComp from "@/components/Button/Button.vue"
 
 <style lang="scss" scoped>
 @import '@/assets/scss/variables.scss';
+@import '@/assets/scss/mixins.scss';
 
   .item{
     display: flex;
@@ -53,7 +54,11 @@ import ButtonComp from "@/components/Button/Button.vue"
       flex:1;
 
       &__horse{
-        width: 9rem;
+        width: 6rem;
+
+        @include xl{
+          width: 7rem;
+        }      
       }
     }
   }

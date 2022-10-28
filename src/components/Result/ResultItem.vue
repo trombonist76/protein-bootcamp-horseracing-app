@@ -24,6 +24,9 @@ const topClass = computed(() => ({
         <span class="material-symbols-outlined time__icon">timer</span>
         {{props.result.time}}
       </div>
+      <div class="selected" v-if="props.result.isSelected">
+        <span class="material-symbols-outlined selected__icon" >verified</span>
+      </div>
     </div>
   </div>
 </template>
@@ -43,10 +46,10 @@ const topClass = computed(() => ({
 
 
   &__specs {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
     flex: 1;
-    justify-content: space-evenly;
-    align-items: center;
+    place-items: center;
     
 
     .time{
@@ -61,10 +64,21 @@ const topClass = computed(() => ({
 
       &::before{
         content: 'Finished in';
-        letter-spacing: .06rem;
+        letter-spacing: .03rem;
         font-size: .9rem;
         font-weight: 400;
         font-style: italic;
+      }
+    }
+
+    .selected{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: .4rem;
+
+      &__icon{
+        font-size: 1.4rem;
       }
     }
   }
@@ -91,13 +105,14 @@ const topClass = computed(() => ({
   border: none;
 
   .item__specs {
+    display: flex;
     flex-direction: column;
     justify-content: flex-start;
     width: 100%;
-    gap: .2rem;
+    gap: .3rem;
 
     .time::before{
-        content: ''
+        content: '';
       }
   }
   .item__trophy {

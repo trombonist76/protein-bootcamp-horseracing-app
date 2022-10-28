@@ -1,8 +1,6 @@
 import { defineStore } from 'pinia'
 import { useHorseStore } from './useHorse'
 import { useCountdownStore } from './useCountdown'
-
-
 export const useRaceStore = defineStore('race',{
   state: () => ({
     isStarted: false,

@@ -23,7 +23,7 @@ const rankClass = computed(() => ({
       <span class="spec speed">
         {{ props.horse.speed }} kph</span>
     </div>
-
+    <span class="item__selected material-symbols-outlined" v-if="props.horse.isSelected">verified</span>
   </div>
 </template>
 <style scoped lang="scss">
@@ -65,6 +65,12 @@ const rankClass = computed(() => ({
     width: 1rem;
     font-size: .9rem;
     margin: auto;
+  }
+
+  &__selected {
+    border-radius: 50%;
+    color: $ranking-navy-color;
+    font-size: 1.2rem;
   }
 
 }
