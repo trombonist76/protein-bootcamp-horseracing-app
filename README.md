@@ -45,6 +45,12 @@ depending on the design, the leaderboard is located anywhere on the screen.
 
 <br>
 
+## :tv: **DEMO**
+
+### [Netlify Demo](https://horse-racing-vue.netlify.app/)
+
+<br>
+
 ## :film_strip: **Preview**
 
 ![Race Start Video](/src//assets/readme-img/gif-1.gif "Gif-1")

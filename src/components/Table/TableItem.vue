@@ -4,6 +4,7 @@ import ButtonComp from "@/components/Button/Button.vue"
   const props = defineProps(["horse"])
   const emits = defineEmits(["selectHorse"])
   const fileExtension = ref("png")
+  const imagePath = computed(() => getImagePath())
 
   //It changes file extension, 
   //First, horse.png is displayed in the UI. Then hovering the card, it renders the horse.gif in the UI.
@@ -14,12 +15,17 @@ import ButtonComp from "@/components/Button/Button.vue"
   const selectHandler = () => {
     emits("selectHorse", props.horse)
   }
+
+  const getImagePath = () => {
+    const path = new URL(`/src/assets/img/horse-${props.horse.id}.${fileExtension}`, import.meta.url).href
+    return path
+  }
 </script>
 
 <template>
   <div class="item">
     <div class="image" @mouseover="changeImageHandler" @mouseout="changeImageHandler">
-      <img :src="`/src/assets/img/horse-${props.horse.id}.${fileExtension}`" class="image__horse" alt="horse-image">
+      <img :src="imagePath" class="image__horse" alt="horse-image">
     </div>
     <b class="item__name">{{props.horse.name}}</b>
     <ButtonComp @click="selectHandler" name="Select Horse"></ButtonComp>
