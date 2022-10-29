@@ -8,6 +8,10 @@
   const raceStore =  useRaceStore()
   const checkRun = computed(() => raceStore.isStarted && props.horse.location < 90)
 
+  //Props.horse.location initial value = 0
+  // When the race starts the value of horse.location = 1
+  // Then watch triggered after this value change
+  // Horse runs to the finish line
   watch(() => props.horse.location, () => {
     if(props.horse.location < 90){
       horseStore.runHorse(props.horse)

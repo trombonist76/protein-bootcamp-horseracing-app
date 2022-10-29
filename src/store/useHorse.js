@@ -16,6 +16,9 @@ export const useHorseStore = defineStore('horse', {
   },
 
   actions: {
+
+    // Initial location = 0 then changes in this function to 1,
+    // This triggered 'watch' in Horse.vue and horses start to run. 
     startHorsesToRace() {
       this.horses = this.horses.map(horse => {
         return {
@@ -27,6 +30,7 @@ export const useHorseStore = defineStore('horse', {
       })
     },
 
+    // It Sorts horses by location / finishing time or race time
     sortHorses(){
       const rankings = [...this.horses].sort((a,b) => {
         const now = Date.now()
@@ -55,6 +59,7 @@ export const useHorseStore = defineStore('horse', {
       setTimeout(() => this.updateHorse(horse), 2000 / horse.speed)
     },
 
+    //When horses come to finish line it changes some property in horse obj
     goFinish(finishedHorse){
       const horse = this.findHorse(finishedHorse.id)
       const now = Date.now()

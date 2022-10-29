@@ -45,14 +45,12 @@ const topClass = computed(() => ({
   padding: 0 3rem;
   justify-content: center;
 
-
   &__specs {
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
     flex: 1;
     place-items: center;
     
-
     .time{
       display: flex;
       justify-content: center;
@@ -96,7 +94,6 @@ const topClass = computed(() => ({
     border-radius: 50%;
   }
 }
-
 .top{
   flex-direction: column;
   grid-column: span 1 / span 1;
@@ -125,7 +122,6 @@ const topClass = computed(() => ({
     }
   }
 }
-
 .first {
   background-color: $first-bg-color;
   height: 13rem;
@@ -136,7 +132,6 @@ const topClass = computed(() => ({
   height: 11rem;
   order: -1;
 }
-
 .third {
   background-color: $third-bg-color;
   height: 10rem;
