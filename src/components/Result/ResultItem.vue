@@ -4,7 +4,8 @@ import { computed } from 'vue';
 const props = defineProps(["result", "rank"])
 const checkInTop = computed(() => props.rank < 3)
 const medals = ["gold", "silver", "bronze"]
-const imagePath = computed(() => `/src/assets/img/${medals.at(props.rank)}-medal.png`)
+const imagePath = computed(() => new URL(`/src/assets/img/${medals.at(props.rank)}-medal.png`, import.meta.url).href)
+
 const topClass = computed(() => ({
   "top first": props.rank === 0,
   "top second": props.rank === 1,
@@ -44,14 +45,12 @@ const topClass = computed(() => ({
   padding: 0 3rem;
   justify-content: center;
 
-
   &__specs {
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
     flex: 1;
     place-items: center;
     
-
     .time{
       display: flex;
       justify-content: center;
@@ -95,7 +94,6 @@ const topClass = computed(() => ({
     border-radius: 50%;
   }
 }
-
 .top{
   flex-direction: column;
   grid-column: span 1 / span 1;
@@ -124,7 +122,6 @@ const topClass = computed(() => ({
     }
   }
 }
-
 .first {
   background-color: $first-bg-color;
   height: 13rem;
@@ -135,7 +132,6 @@ const topClass = computed(() => ({
   height: 11rem;
   order: -1;
 }
-
 .third {
   background-color: $third-bg-color;
   height: 10rem;

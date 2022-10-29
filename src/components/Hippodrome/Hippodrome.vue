@@ -1,24 +1,22 @@
 <script setup>
-import {useHorseStore} from "@/store/useHorse"
-import { useRaceStore } from '@/store/useRace';
-import ArenaStart from "./HippodromeStart.vue";
-import ArenaFinish from "./HippodromeFinish.vue";
-import Background from "./HippodromeBackground.vue"
+import HippodromeStart from "./HippodromeStart.vue";
+import HippodromeFinish from "./HippodromeFinish.vue";
+import HippodromeBackground from "./HippodromeBackground.vue"
 import Horse from "@/components/Horse/Horse.vue";
+import { useHorseStore } from "@/store/useHorse"
 
-const raceStore =  useRaceStore()
 const horseStore = useHorseStore()
 </script>
 
 <template>
   <div class="wrapper">
-    <Background/>
+    <HippodromeBackground/>
     <div class="lane-wrapper">
       <div class="horses">
-          <Horse class="item" v-for="horse in horseStore.horses" :key="horse.id" :horse="horse"/>
+          <Horse class="horses__horse" v-for="horse in horseStore.horses" :key="horse.id" :horse="horse"/>
       </div>
-      <ArenaStart></ArenaStart>
-      <ArenaFinish></ArenaFinish>
+      <HippodromeStart></HippodromeStart>
+      <HippodromeFinish></HippodromeFinish>
     </div>
   </div>
 </template>
@@ -47,19 +45,9 @@ const horseStore = useHorseStore()
     display: flex;
     flex-direction: column;
     border-left: 4px solid white;
-      .item:not(:last-child){
+      &__horse:not(:last-child){
         border-bottom: 4px solid white;
       }
     }
   }
-
-// @keyframes slide {
-//   0% {
-//     transform: translate3d(0, 0, 0);
-//   }
-
-//   100% {
-//     transform: translate3d(-33%, 0, 0);
-//   }
-// }
 </style>

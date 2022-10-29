@@ -15,7 +15,6 @@ const horseStore = useHorseStore()
 @import '@/assets/scss/variables.scss';
 @import '@/assets/scss/mixins.scss';
 
-
 .finish {
     writing-mode: vertical-lr;
     display: flex;

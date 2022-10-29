@@ -1,5 +1,4 @@
 <script setup>
-
 import Leaderboard from '../Leaderboard/Leaderboard.vue';
 import ButtonComp from '@/components/Button/Button.vue';
 import { useRaceStore } from '@/store/useRace';
@@ -12,6 +11,7 @@ const raceStore =  useRaceStore()
 const horseStore = useHorseStore()
 const countdownStore = useCountdownStore()
 const showStartButton = computed(() => !raceStore.isStarted && !countdownStore.isStarted)
+
 const startHandler = async () => {
   raceStore.startRace()
 }
@@ -21,7 +21,10 @@ const restartHandler = () => {
   raceStore.startRace()
 }
 
-watch(() => horseStore.isAnyClosing, async() => {
+// When the finish line is horse Store.is Any Closing = true, 
+// it slides from the left to the right and this animation is completed in two seconds. 
+// Therefore, the animation of the background must be delayed by 2 seconds.
+watch(() => horseStore.isAnyClosing, async () => {
   if(!horseStore.isAnyClosing) return
   await delay(2000)
   raceStore.pauseBackground()
@@ -70,8 +73,6 @@ watch(() => horseStore.isAnyClosing, async() => {
   background: url('@/assets/icons/mid.svg') repeat-x;
   background-size: cover;
 }
-
-
 
 @include xxl{
   .arena {

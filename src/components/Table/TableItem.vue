@@ -5,6 +5,8 @@ import ButtonComp from "@/components/Button/Button.vue"
   const emits = defineEmits(["selectHorse"])
   const fileExtension = ref("png")
 
+  //It changes file extension, 
+  //First, horse.png is displayed in the UI. Then hovering the card, it renders the horse.gif in the UI.
   const changeImageHandler = () => {
     fileExtension.value = fileExtension.value === "png" ? "gif" : "png" 
   }

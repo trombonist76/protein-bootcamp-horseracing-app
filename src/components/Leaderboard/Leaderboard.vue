@@ -5,6 +5,9 @@ import { onMounted, onUnmounted, ref } from "vue";
 const horseStore = useHorseStore()
 const leaderboard = ref(null)
 
+// Horse rankings change instantly, 
+// but this change is so fast that it creates bad user experience in the UI. In order to fix this, 
+// it is better to watch the horse sequences at 500ms intervals.
 let interval = ref(null)
 
 onMounted(() => {

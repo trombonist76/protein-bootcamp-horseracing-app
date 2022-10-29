@@ -1,3 +1,15 @@
+
+// speedMultiplier
+// It returns new speed calculated by by deviation
+// If speed is 35 it can returns int value of between this values;
+// (1 - 0.05) * 35 = 0.95 * 35 = 33,25
+// (1 + 0.05) * 35 = 1.05 * 35 = 36,75
+// And result value must between in minBetween and MaxBetween.
+// This function is created to prevent unrealistic increase or decrease in horse speed.
+// Example 30, 40, 20, 40
+// To avoid this, the horse speed increases or decreases according to the deviation rate.
+
+
 import {getSelectedHorse} from "@/service/local"
 
 const getHorseNames = () => {
@@ -7,7 +19,6 @@ const getHorseNames = () => {
   ]
   return horseNames
 }
-
 
 export function getHorses() {
   const horses = [];
