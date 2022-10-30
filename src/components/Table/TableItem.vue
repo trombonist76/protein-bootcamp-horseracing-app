@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import ButtonComp from "@/components/Button/Button.vue"
   const props = defineProps(["horse"])
   const emits = defineEmits(["selectHorse"])
