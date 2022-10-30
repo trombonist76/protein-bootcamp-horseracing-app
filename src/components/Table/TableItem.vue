@@ -17,7 +17,7 @@ import ButtonComp from "@/components/Button/Button.vue"
   }
 
   const getImagePath = () => {
-    const path = new URL(`/src/assets/img/horse-${props.horse.id}.${fileExtension}`, import.meta.url).href
+    const path = new URL(`/src/assets/img/horse-${props.horse.id}.${fileExtension.value}`, import.meta.url).href
     return path
   }
 </script>

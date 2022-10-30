@@ -36,8 +36,8 @@
   <div class="lane-wrapper">
     <span class="lane-wrapper__number">{{horse.id}}</span>
     <div class="horse" >
-      <img class="horse__img"  v-if="!checkRun" :style="{left: `${props.horse.location}%`}" :src="getImage()" alt="Standing Horse">
-      <img class="horse__img running" v-else  :style="{left: `${props.horse.location}%`}" :src="getImage(false)" alt="Running Horse">
+      <img class="horse__img"  v-show="!checkRun" :style="{left: `${props.horse.location}%`}" :src="getImage()" alt="Standing Horse">
+      <img class="horse__img running" v-show="checkRun" :style="{left: `${props.horse.location}%`}" :src="getImage(false)" alt="Running Horse">
     </div>
   </div>
 </template>
